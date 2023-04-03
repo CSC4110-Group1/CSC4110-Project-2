@@ -21,7 +21,7 @@ class simulationMode:
                 +(capa*Data['prices']['cappa'])+(cocoa*Data['prices']['cocoaLatte'])
             if total==0:
                 total=Data['prices']['regular']
-                cost=0.77
+                costOforder=0.77
                 reg=1
             cost+=costOforder
             revenue+=total
@@ -44,4 +44,5 @@ class simulationMode:
          
         
         
+
 
