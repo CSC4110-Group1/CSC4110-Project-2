@@ -7,7 +7,7 @@ from PIL import Image,ImageTk
 from logCheckSign import loginChecks
 from TakeOrder import TakeOrders
 from StockAndPrices import inventory
-
+from SimulationMode import simulationMode
 class App(customtkinter.CTk):
     WIDTH = 1000
     HEIGHT = 700
@@ -161,7 +161,19 @@ class App(customtkinter.CTk):
         self.login_button.grid(row=3, column=0, padx=30, pady=(15, 15))
         self.signup_button = customtkinter.CTkButton(self.account_frame, text="Signup", command=lambda:self.loginOrHub(2,self,1), width=120)
         self.signup_button.grid(row=4, column=0, padx=30, pady=(0, 15))
+        '''
+        ============= Simulation Mode Page =============
+        '''
+        self.sim_Frame=self.account_frame = customtkinter.CTkFrame(self.simulation_frame, 
+                                                    corner_radius=0,fg_color="transparent")
+        self.sim_Frame.pack(pady=120)
+        self.sim_label=customtkinter.CTkLabel(self.sim_Frame, 
+                                                     text = "Press the button below to simulate 100\n random orders at the current price:", 
+                                                     font=("Arial", 18))
         
+        self.sim_label.pack()
+        self.sim_button = customtkinter.CTkButton(self.sim_Frame, text="BEGIN", command=self.simulationResults, width=120)
+        self.sim_button.pack(pady=20)
         '''
         ============= SETTING PAGE =============
         '''
@@ -200,7 +212,7 @@ class App(customtkinter.CTk):
                                                                command=self.change_scaling_event)
         self.scaling_optionemenu.grid(row=2, column=1, padx=20, pady=(0, 20), sticky='w')
 
-
+        
         '''
         ============= GRID CONFIGURE =============
         '''
@@ -226,6 +238,11 @@ class App(customtkinter.CTk):
     '''
     ============= METHODS =============
     '''
+    def simulationResults(self):
+        output=simulationMode.simulationMode()
+        messagebox.showinfo(message="Simulation in progress...........")
+        messagebox.showinfo(title="Simulation Complete",message=output)
+        
     def select_frame_by_name(self, name):
         # set button color for selected button
         self.dashboard_button.configure(fg_color=("gray75", "gray25") if name == "dashboard" else "transparent")

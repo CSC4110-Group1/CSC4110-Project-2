@@ -40,6 +40,7 @@ price["cocoaLatte"]=3.75
 Database["prices"]=price
 
 
+
 #reads the file user requested
 with open("AppData.json","w") as out:
     json.dump(Database,out)
